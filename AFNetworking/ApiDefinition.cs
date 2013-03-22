@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+//using System.ComponentModel;
 
 using MonoTouch.ObjCRuntime;
 using MonoTouch.Foundation;
@@ -7,7 +8,6 @@ using MonoTouch.UIKit;
 
 namespace AFNetworking
 {
-	using System;
 
 	[BaseType (typeof (NSObject))]
 	public partial interface AFHTTPClient {
@@ -294,6 +294,16 @@ namespace AFNetworking
 		
 		[Static, Export ("XMLDocumentRequestOperationWithRequest:success:failure:")]
 		instancetype XMLDocumentRequestOperationWithRequest (NSURLRequest urlRequest, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);*/
+	}
+
+	[BaseType (typeof (UIImageView))]
+	[Category]
+	interface AFNetworkingImageExtras {
+		[Export ("setImageWithURL:")]
+		void SetImageUrl (NSUrl url);
+
+		[Export ("setImageWithURL:placeholderImage:")]
+		void SetImageUrl(NSUrl url, UIImage placeholderImage);
 	}
 
 }

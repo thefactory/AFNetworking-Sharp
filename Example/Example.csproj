@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="AppDotNetClient.cs" />
     <Compile Include="Post.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="ExampleViewController_iPad.xib" />
@@ -113,5 +114,9 @@
       <Project>{8736B208-9B6B-4B35-9817-04106F2DAF88}</Project>
       <Name>AFNetworking</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\profile-image-placeholder.png" />
+    <BundleResource Include="Resources\profile-image-placeholder%402x.png" />
   </ItemGroup>
 </Project>
