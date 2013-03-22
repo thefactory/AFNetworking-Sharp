@@ -35,15 +35,16 @@ namespace Example
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
 
-			Console.WriteLine ("TEST");
 			AFHTTPClient client = new AFHTTPClient (new NSUrl ("https://alpha-api.app.net"));
 			client.RegisterHTTPOperationClass (new Class (typeof(AFJSONRequestOperation)));
-			//client.SetDefaultHeader ("Accept", "application/json");
+			client.SetDefaultHeader ("Accept", "application/json");
+			Console.WriteLine (client.Description);
 			client.GetPath ("stream/0/posts/stream/global",
 			                null,
 			                (request, response) => {
 								Console.WriteLine (response.GetType());
 								Console.WriteLine (response);
+								Console.WriteLine (response.ValueForKey(new NSString("data")));
 							},
 							(request, error) => {
 								Console.WriteLine ("T2");
