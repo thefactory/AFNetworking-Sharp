@@ -55,7 +55,7 @@ namespace AFNetworking
 		void SetDefaultCredential (NSUrlCredential credential);
 		
 		[Export ("requestWithMethod:path:parameters:")]
-		NSMutableUrlRequest RequestWithMethod (string method, string path, NSDictionary parameters);
+		NSMutableUrlRequest RequestWithMethod (string method, string path, [NullAllowed] NSDictionary parameters);
 		
 		/*[Export ("multipartFormRequestWithMethod:path:parameters:constructingBodyWithBlock:")]
 		NSMutableURLRequest MultipartFormRequestWithMethod (string method, string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] block);
@@ -76,7 +76,7 @@ namespace AFNetworking
 		void EnqueueBatchOfHTTPRequestOperations (NSArray operations, [unmapped: blockpointer: BlockPointer] progressBlock, [unmapped: blockpointer: BlockPointer] completionBlock);*/
 		
 		[Export ("getPath:parameters:success:failure:")]
-		void GetPath (string path, [NullAllowed] NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, Action<AFHTTPRequestOperation, NSError> failure);
+		void GetPath (string path, [NullAllowed] NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
 		/*[Export ("postPath:parameters:success:failure:")]
 		void PostPath (string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);

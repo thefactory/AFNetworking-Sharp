@@ -100,6 +100,8 @@
     <Compile Include="ExampleViewController.designer.cs">
       <DependentUpon>ExampleViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppDotNetClient.cs" />
+    <Compile Include="Post.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="ExampleViewController_iPad.xib" />
