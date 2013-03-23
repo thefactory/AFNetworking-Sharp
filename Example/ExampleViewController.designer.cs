@@ -7,8 +7,8 @@ using MonoTouch.Foundation;
 
 namespace afwrapper
 {
-	[Register ("afwrapperViewController")]
-	partial class afwrapperViewController
+	[Register ("ExampleViewController")]
+	partial class ExampleViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{
