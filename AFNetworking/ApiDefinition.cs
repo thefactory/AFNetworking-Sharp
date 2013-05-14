@@ -8,6 +8,12 @@ using MonoTouch.UIKit;
 
 namespace AFNetworking
 {
+    public delegate void AFImageRequestCallback(UIImage image);
+    public delegate UIImage AFImageRequestImageProcessingCallback(UIImage image);
+    public delegate void AFImageRequestDetailedCallback(NSUrlRequest request, NSHttpUrlResponse response, UIImage image);
+    public delegate void AFImageRequestFailedCallback(NSUrlRequest request, NSHttpUrlResponse response, NSError error);
+
+    public delegate void VoidBlock();
 
 	[BaseType (typeof (NSObject))]
 	public partial interface AFHTTPClient {
@@ -122,6 +128,9 @@ namespace AFNetworking
 	[BaseType (typeof (AFURLConnectionOperation))]
 	public partial interface AFHTTPRequestOperation {
 
+        [Export("initWithRequest:")]
+        IntPtr Constructor(NSUrlRequest request);
+
 		/*[Export ("response")]
 		NSUrlResponse Response { get; }*/
 		
@@ -162,11 +171,11 @@ namespace AFNetworking
 		[Export ("responseImage")]
 		UIImage ResponseImage { get; }
 		
-		/*[Static, Export ("imageRequestOperationWithRequest:success:")]
-		instancetype ImageRequestOperationWithRequest (NSURLRequest urlRequest, [unmapped: blockpointer: BlockPointer] success);
+		[Static, Export ("imageRequestOperationWithRequest:success:")]
+        AFImageRequestOperation ImageRequestOperationWithRequest (NSUrlRequest urlRequest, AFImageRequestCallback success);
 		
-		[Static, Export ("imageRequestOperationWithRequest:imageProcessingBlock:success:failure:")]
-		instancetype ImageRequestOperationWithRequest (NSURLRequest urlRequest, [unmapped: blockpointer: BlockPointer] imageProcessingBlock, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);*/
+        [Static, Export ("imageRequestOperationWithRequest:imageProcessingBlock:success:failure:")]
+        AFImageRequestOperation ImageRequestOperationWithRequest(NSUrlRequest urlRequest, AFImageRequestImageProcessingCallback imageProcessingBlock, AFImageRequestDetailedCallback success, AFImageRequestFailedCallback failed);
 	}
 	
 	[BaseType (typeof (AFHTTPRequestOperation))]
@@ -245,7 +254,10 @@ namespace AFNetworking
 		
 		[Export ("resume")]
 		void Resume ();
-		
+        
+        [Export ("setCompletionBlock:")]
+        void SetCompletionBlock (VoidBlock block);
+        
 		/*[Export ("setUploadProgressBlock:")]
 		void SetUploadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
 		
