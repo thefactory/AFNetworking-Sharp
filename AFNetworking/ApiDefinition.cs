@@ -8,6 +8,17 @@ using MonoTouch.UIKit;
 
 namespace AFNetworking
 {
+	public delegate void AFHttpRequestSuccessCallback(AFHTTPRequestOperation operation, NSObject responseObject);
+
+	public delegate void AFHttpRequestFailureCallback(AFHTTPRequestOperation operation, NSError error);
+
+	public delegate void AFImageRequestCallback(UIImage image);
+
+	public delegate UIImage AFImageRequestImageProcessingCallback(UIImage image);
+
+	public delegate void AFImageRequestDetailedCallback(NSUrlRequest request, NSHttpUrlResponse response, UIImage image);
+
+	public delegate void AFImageRequestFailedCallback(NSUrlRequest request, NSHttpUrlResponse response, NSError error);
 
 	[BaseType (typeof (NSObject))]
 	public partial interface AFHTTPClient {
@@ -122,6 +133,9 @@ namespace AFNetworking
 	[BaseType (typeof (AFURLConnectionOperation))]
 	public partial interface AFHTTPRequestOperation {
 
+		[Export("initWithRequest:")]
+		IntPtr Constructor(NSUrlRequest request);
+
 		/*[Export ("response")]
 		NSUrlResponse Response { get; }*/
 		
@@ -131,11 +145,11 @@ namespace AFNetworking
 		[Export ("hasAcceptableContentType")]
 		bool HasAcceptableContentType { get; }
 		
-		/*[Export ("successCallbackQueue")]
-		DispatchQueue SuccessCallbackQueue { get; set; }
+		[Export ("successCallbackQueue")]
+		MonoTouch.CoreFoundation.DispatchQueue SuccessCallbackQueue { get; set; }
 		
 		[Export ("failureCallbackQueue")]
-		DispatchQueue FailureCallbackQueue { get; set; }*/
+		MonoTouch.CoreFoundation.DispatchQueue FailureCallbackQueue { get; set; }
 		
 		[Static, Export ("acceptableStatusCodes")]
 		NSIndexSet AcceptableStatusCodes ();
@@ -152,8 +166,8 @@ namespace AFNetworking
 		[Static, Export ("canProcessRequest:")]
 		bool CanProcessRequest (NSUrlRequest urlRequest);
 		
-		/*[Export ("setCompletionBlockWithSuccess:failure:")]
-		void SetCompletionBlockWithSuccess ([unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);*/
+		[Export ("setCompletionBlockWithSuccess:failure:")]
+		void SetCompletionBlockWithSuccess(AFHttpRequestSuccessCallback success, AFHttpRequestFailureCallback failure);
 	}
 	
 	[BaseType (typeof (AFHTTPRequestOperation))]
@@ -162,11 +176,11 @@ namespace AFNetworking
 		[Export ("responseImage")]
 		UIImage ResponseImage { get; }
 		
-		/*[Static, Export ("imageRequestOperationWithRequest:success:")]
-		instancetype ImageRequestOperationWithRequest (NSURLRequest urlRequest, [unmapped: blockpointer: BlockPointer] success);
+		[Static, Export ("imageRequestOperationWithRequest:success:")]
+		AFImageRequestOperation ImageRequestOperationWithRequest (NSUrlRequest urlRequest, AFImageRequestCallback success);
 		
 		[Static, Export ("imageRequestOperationWithRequest:imageProcessingBlock:success:failure:")]
-		instancetype ImageRequestOperationWithRequest (NSURLRequest urlRequest, [unmapped: blockpointer: BlockPointer] imageProcessingBlock, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);*/
+		AFImageRequestOperation ImageRequestOperationWithRequest(NSUrlRequest urlRequest, AFImageRequestImageProcessingCallback imageProcessingBlock, AFImageRequestDetailedCallback success, AFImageRequestFailedCallback failed);
 	}
 	
 	[BaseType (typeof (AFHTTPRequestOperation))]
@@ -245,6 +259,9 @@ namespace AFNetworking
 		
 		[Export ("resume")]
 		void Resume ();
+		
+		[Export ("setCompletionBlock:")]
+		void SetCompletionBlock(Action block);
 		
 		/*[Export ("setUploadProgressBlock:")]
 		void SetUploadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
