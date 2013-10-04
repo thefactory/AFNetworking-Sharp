@@ -89,17 +89,17 @@ namespace AFNetworking
 		[Export ("getPath:parameters:success:failure:")]
 		void GetPath (string path, [NullAllowed] NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
-		/*[Export ("postPath:parameters:success:failure:")]
-		void PostPath (string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);
+		[Export ("postPath:parameters:success:failure:")]
+		void PostPath (string path, NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
 		[Export ("putPath:parameters:success:failure:")]
-		void PutPath (string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);
+		void PutPath (string path, NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
 		[Export ("deletePath:parameters:success:failure:")]
-		void DeletePath (string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);
+		void DeletePath (string path, NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
 		[Export ("patchPath:parameters:success:failure:")]
-		void PatchPath (string path, NSDictionary parameters, [unmapped: blockpointer: BlockPointer] success, [unmapped: blockpointer: BlockPointer] failure);*/
+		void PatchPath (string path, NSDictionary parameters, Action<AFHTTPRequestOperation, NSObject> success, [NullAllowed] Action<AFHTTPRequestOperation, NSError> failure);
 		
 		/*[Field ("kAFUploadStream3GSuggestedPacketSize", "__Internal")]
 		uint kAFUploadStream3GSuggestedPacketSize { get; }*/

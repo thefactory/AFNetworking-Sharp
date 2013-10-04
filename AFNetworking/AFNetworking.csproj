@@ -47,7 +47,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Xamarin.ObjcBinding.CSharp.targets" />
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="libAFNetworking.a" />
+    <ObjcBindingNativeLibrary Include="..\vendor\afnetworking\build\libAFNetworking.a">
+      <Link>libAFNetworking.a</Link>
+    </ObjcBindingNativeLibrary>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="libAFNetworking.linkwith.cs">
