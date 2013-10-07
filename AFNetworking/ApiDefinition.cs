@@ -263,13 +263,13 @@ namespace AFNetworking
 		[Export ("setCompletionBlock:")]
 		void SetCompletionBlock(Action block);
 		
-		/*[Export ("setUploadProgressBlock:")]
-		void SetUploadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
+		[Export ("setUploadProgressBlock:")]
+        void SetUploadProgressBlock (AFURLConnectionOperationProgress block);
 		
 		[Export ("setDownloadProgressBlock:")]
-		void SetDownloadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
+        void SetDownloadProgressBlock (AFURLConnectionOperationProgress block);
 		
-		[Export ("setAuthenticationAgainstProtectionSpaceBlock:")]
+		/*[Export ("setAuthenticationAgainstProtectionSpaceBlock:")]
 		void SetAuthenticationAgainstProtectionSpaceBlock ([unmapped: blockpointer: BlockPointer] block);
 		
 		[Export ("setAuthenticationChallengeBlock:")]
@@ -296,6 +296,8 @@ namespace AFNetworking
 		[Notification, Field ("AFNetworkingOperationDidFinishNotification", "__Internal")]
 		NSString AFNetworkingOperationDidFinishNotification { get; }
 	}
+
+    public delegate void AFURLConnectionOperationProgress (int bytes, long totalBytes, long totalBytesExpected);
 	
 	[BaseType (typeof (AFHTTPRequestOperation))]
 	public partial interface AFXMLRequestOperation {
