@@ -22,11 +22,6 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="BeforeBuild" command="${SolutionDir}/vendor/afnetworking/build-static-lib" workingdir="${SolutionDir}/vendor/afnetworking" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -37,26 +32,16 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Xamarin.ObjcBinding.CSharp.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="monotouch" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Xamarin.ObjcBinding.CSharp.targets" />
-  <ItemGroup>
-    <ObjcBindingNativeLibrary Include="..\vendor\afnetworking\build\libAFNetworking.a">
+    <ObjcBindingNativeLibrary Include="libAFNetworking.a">
       <Link>libAFNetworking.a</Link>
     </ObjcBindingNativeLibrary>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="libAFNetworking.linkwith.cs">
       <DependentUpon>libAFNetworking.a</DependentUpon>
     </Compile>
