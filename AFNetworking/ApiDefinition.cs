@@ -20,6 +20,8 @@ namespace AFNetworking
 
 	public delegate void AFImageRequestFailedCallback(NSUrlRequest request, NSHttpUrlResponse response, NSError error);
 
+	public delegate void AFURLConnectionOperationProgressCallback (int bytes, long totalBytes, long totalBytesExpected);
+
 	[BaseType (typeof (NSObject))]
 	public partial interface AFHTTPClient {
 		
@@ -263,13 +265,13 @@ namespace AFNetworking
 		[Export ("setCompletionBlock:")]
 		void SetCompletionBlock(Action block);
 		
-		/*[Export ("setUploadProgressBlock:")]
-		void SetUploadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
+		[Export ("setUploadProgressBlock:")]
+		void SetUploadProgressBlock (AFURLConnectionOperationProgressCallback block);
 		
 		[Export ("setDownloadProgressBlock:")]
-		void SetDownloadProgressBlock ([unmapped: blockpointer: BlockPointer] block);
+		void SetDownloadProgressBlock (AFURLConnectionOperationProgressCallback block);
 		
-		[Export ("setAuthenticationAgainstProtectionSpaceBlock:")]
+		/*[Export ("setAuthenticationAgainstProtectionSpaceBlock:")]
 		void SetAuthenticationAgainstProtectionSpaceBlock ([unmapped: blockpointer: BlockPointer] block);
 		
 		[Export ("setAuthenticationChallengeBlock:")]
@@ -296,7 +298,7 @@ namespace AFNetworking
 		[Notification, Field ("AFNetworkingOperationDidFinishNotification", "__Internal")]
 		NSString AFNetworkingOperationDidFinishNotification { get; }
 	}
-	
+
 	[BaseType (typeof (AFHTTPRequestOperation))]
 	public partial interface AFXMLRequestOperation {
 		
